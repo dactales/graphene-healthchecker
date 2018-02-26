@@ -35,3 +35,12 @@ bitshares-backend-health.py --listen 8080 wss://node.bitshares.eu
 5. Check that current head time is less than 60 seconds old and next
    maintenance interval is more than 10 seconds in the future.
    (Raise HTTP/502 if not.)
+
+## Systemd
+
+In `bitshares-backend-health.service`, replace:
+
+* `{{ bitshares_health_listen }}` and
+* `{{ bitshares_health_url }}`
+
+and install it in your systemd directory `/etc/systemd/system`.
