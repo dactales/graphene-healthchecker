@@ -55,9 +55,6 @@ docs/html
 # PyBuilder
 target/
 
-# Configuration Files
-*config.py
-
 # Vim temp files
 *.swp
 
