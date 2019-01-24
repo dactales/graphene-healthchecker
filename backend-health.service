@@ -1,0 +1,15 @@
+[Unit]
+Description=Graphene Healthcheck Daemon ({{ graphene_health_listen }})
+After=network.target
+
+[Service]
+User=healthcheck
+Group=healthcheck
+WorkingDirectory=/home/healthcheck
+Restart=always
+ExecStart=uwsgi --ini {{ graphene_health_install_dir }}
+StandardOutput=syslog
+StandardError=syslog
+
+[Install]
+WantedBy=multi-user.target
