@@ -30,6 +30,8 @@ def fetch_data(url):
     except Exception as e:
         raise Exception("Node timed out: {}".format(str(e)))
 
+    print(req)
+
     if req.status_code != 200:
         raise Exception("Node returns an error core {}".format(req.status_code))
 
@@ -72,10 +74,11 @@ def run_backend_tests(data):
 
 def appendadditionadata(ret, data):
     ret["server_time"] = format_time(datetime.datetime.utcnow())
-    ret["head_block_time"] = data.get("time")
-    ret["deltatime"] = abs(
-        parse_time(ret["head_block_time"]) - parse_time(ret["server_time"])
-    ).total_seconds()
+    if data:
+        ret["head_block_time"] = data.get("time")
+        ret["deltatime"] = abs(
+            parse_time(ret["head_block_time"]) - parse_time(ret["server_time"])
+        ).total_seconds()
     return ret
 
 
