@@ -15,16 +15,11 @@ def format_time(datim):
     return datim.strftime(timeFormat)
 
 
-def fetch_data(url):
+def query(url, data):
     try:
         req = requests.post(
             url,
-            json={
-                "method": "call",
-                "params": ["database", "get_objects", [["2.1.0"]]],
-                "jsonrpc": "2.0",
-                "id": 1,
-            },
+            json={"method": "call", "params": data, "jsonrpc": "2.0", "id": 1},
             timeout=2,
         )
     except Exception as e:
@@ -43,7 +38,30 @@ def fetch_data(url):
     if "result" not in data:
         raise Exception("Node does not return a result but {}".format(data))
 
-    return data.get("result")[0]
+    result = data.get("result")
+    if isinstance(result, (list, set)):
+        return result[0]
+    else:
+        return result
+
+
+def fetch_data(url):
+    return query(url, ["database", "get_objects", [["2.1.0"]]])
+
+
+def fetch_network_info(url):
+    try:
+        return query(url, ["network_node", "get_info", []])
+    except:
+        raise Exception("Login required!")
+
+
+def fetch_connected_node_count(url):
+    try:
+        data = fetch_network_info(url)
+    except Exception as e:
+        return -1.0
+    return data.get("connection_count")
 
 
 def get_headblocknum(endpoint):

@@ -15,6 +15,7 @@ from .utils import (
     api_error,
     api_success,
     get_headblocknum,
+    fetch_connected_node_count,
 )
 
 app.config.update(dict(config))
@@ -22,6 +23,10 @@ app.config.update(dict(config))
 
 def get_headblock():
     return get_headblocknum(app.config["witness_url"])
+
+
+def get_connected_count():
+    return fetch_connected_node_count(app.config["witness_url"])
 
 
 @app.route("/")
@@ -42,9 +47,14 @@ def status():
     return api_success(data, tests)
 
 
+clean_endpoint = app.config["witness_url"].split("@")[-1]
 # Add prometheus wsgi middleware to route /metrics requests
 BACKEND_HEADBLOCK_NUM = Gauge(
     "backend_headblock_number", "Backend Head Block Number", ["endpoint"]
 )
-BACKEND_HEADBLOCK_NUM.labels(app.config["witness_url"]).set_function(get_headblock)
+BACKEND_CONNECTIONS_NUM = Gauge(
+    "backend_num_connections", "Backend Connections in P2P network", ["endpoint"]
+)
+BACKEND_HEADBLOCK_NUM.labels(clean_endpoint).set_function(get_headblock)
+BACKEND_CONNECTIONS_NUM.labels(clean_endpoint).set_function(get_connected_count)
 app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": make_wsgi_app()})
