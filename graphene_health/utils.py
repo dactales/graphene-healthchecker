@@ -25,8 +25,6 @@ def query(url, data):
     except Exception as e:
         raise Exception("Node timed out: {}".format(str(e)))
 
-    print(req)
-
     if req.status_code != 200:
         raise Exception("Node returns an error core {}".format(req.status_code))
 
