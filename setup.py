@@ -3,7 +3,7 @@
 
 from setuptools import setup
 
-VERSION = "0.1.4"
+VERSION = "0.1.5"
 URL = "https://github.com/blockchainbv/graphene-healthchecker"
 
 setup(
@@ -12,10 +12,10 @@ setup(
     description="Python library for RPC-healthchecking for graphene blockchains",
     long_description=open("README.md").read(),
     download_url="{}/tarball/{}".format(URL, VERSION),
-    author="Blockchain B.V.",
-    author_email="Fabian.Schuh@blockchainprojectsbv.com",
+    author="ChainSquad GmbH",
+    author_email="Fabian@dactales.com",
     maintainer="Fabian Schuh",
-    maintainer_email="Fabian.Schuh@blockchainprojectsbv.com",
+    maintainer_email="Fabian@dactales.com",
     url=URL,
     keywords=["graphene", "blockchain", "health", "api", "rpc"],
     packages=["graphene_health"],

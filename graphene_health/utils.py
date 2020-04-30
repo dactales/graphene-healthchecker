@@ -1,3 +1,4 @@
+import re
 import requests
 import datetime
 from flask import jsonify
@@ -8,6 +9,9 @@ timeFormat = "%Y-%m-%dT%H:%M:%S"
 
 def parse_time(block_time):
     # convert backend time into timestamp
+    if "." in block_time:
+        # remove deci seconds
+        block_time = re.sub(r"\.\d", "", block_time)
     return datetime.datetime.strptime(block_time, timeFormat)
 
 
