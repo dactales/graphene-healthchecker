@@ -10,7 +10,6 @@ setup(
     name="graphene-healthchecker",
     version=VERSION,
     description="Python library for RPC-healthchecking for graphene blockchains",
-    long_description=open("README.md").read(),
     download_url="{}/tarball/{}".format(URL, VERSION),
     author="ChainSquad GmbH",
     author_email="Fabian@dactales.com",
