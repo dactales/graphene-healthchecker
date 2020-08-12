@@ -3,8 +3,8 @@
 
 from setuptools import setup
 
-VERSION = "0.1.5"
-URL = "https://github.com/blockchainbv/graphene-healthchecker"
+VERSION = "0.1.6"
+URL = "https://github.com/dactales/graphene-healthchecker"
 
 setup(
     name="graphene-healthchecker",
