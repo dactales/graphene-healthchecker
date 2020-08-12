@@ -68,7 +68,7 @@ def get_connected_count():
 
 # Healthchecker
 health.add_check(check_blockchain_alive)
-health.add_check(check_network_node_plugin)
+# health.add_check(check_network_node_plugin)
 health.add_check(check_headblock_timestamp)
 health.add_check(check_maintenance_block_in_future)
 envdump.add_section("additional_data", additional_data)
