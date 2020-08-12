@@ -10,6 +10,7 @@ import click
 def main(listen, url):
     app.config["witness_url"] = url or app.config["witness_url"]
     app.config["port"] = listen or app.config["port"]
+    print(app.config["witness_url"])
     app.run(port=app.config["port"], host="0.0.0.0", debug=True)
 
 
