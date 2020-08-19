@@ -51,16 +51,15 @@ class ConfigClass(dict):
     __setattr__ = dict.__setitem__
 
     def load_yaml(self, *args):
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-        o = open(os.path.join(dir_path, *args))
+        o = open(os.path.join(*args))
         d = yaml.load(o.read(), Loader=yaml.SafeLoader)
         dict_merge(self, d)
 
 
 # load defaults
 config = ConfigClass()
-config.load_yaml("config-defaults.yaml")
+config.load_yaml(os.path.dirname(os.path.realpath(__file__)), "config-defaults.yaml")
 try:
-    config.load_yaml("..", "config.yaml")
+    config.load_yaml(os.getcwd(), "config.yaml")
 except Exception:  # pragma: no cover
     log.info("No config.yaml found in root directory! Using defaults ...")
