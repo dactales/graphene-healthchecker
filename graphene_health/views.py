@@ -25,20 +25,28 @@ def check_network_node_plugin():
 
 def check_headblock_timestamp():
     head_time = parse_time(object_210.get("time"))
-    if not head_time:
-        return False, "No 2.1.0 object available yet"
-    if head_time < datetime.utcnow() + timedelta(seconds=30):
-        return True, "head_block_time ok"
-    return True, f"head_block_time not ok: {head_time}"
+    try:
+        if not head_time:
+            return False, "No 2.1.0 object available yet"
+        if head_time < datetime.utcnow() + timedelta(
+            seconds=30
+        ) and head_time > datetime.utcnow() - timedelta(seconds=30):
+            return True, "head_block_time ok"
+    except Exception:
+        pass
+    return False, f"head_block_time not ok: {head_time}"
 
 
 def check_maintenance_block_in_future():
-    maint_time = parse_time(object_210.get("next_maintenance_time"))
-    if not maint_time:
-        return False, "No 2.1.0 object available yet"
-    if maint_time > datetime.utcnow() - timedelta(seconds=60):
-        return True, "maintenance_block_time ok"
-    return True, f"maintenance_block_time not ok: {maint_time}"
+    try:
+        maint_time = parse_time(object_210.get("next_maintenance_time"))
+        if not maint_time:
+            return False, "No 2.1.0 object available yet"
+        if maint_time > datetime.utcnow() - timedelta(seconds=60):
+            return True, "maintenance_block_time ok"
+    except Exception:
+        pass
+    return False, f"maintenance_block_time not ok: {maint_time}"
 
 
 def additional_data():
