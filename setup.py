@@ -3,8 +3,8 @@
 
 from setuptools import setup
 
-VERSION = "0.1.9"
-URL = "https://github.com/dactales/graphene-healthchecker"
+VERSION = "0.1.10"
+URL = "https://github.com/chainsquad/graphene-healthchecker"
 
 setup(
     name="graphene-healthchecker",
@@ -12,9 +12,9 @@ setup(
     description="Python library for RPC-healthchecking for graphene blockchains",
     download_url="{}/tarball/{}".format(URL, VERSION),
     author="ChainSquad GmbH",
-    author_email="Fabian@dactales.com",
+    author_email="Fabian@chainsquad.com",
     maintainer="Fabian Schuh",
-    maintainer_email="Fabian@dactales.com",
+    maintainer_email="Fabian@chainsquad.com",
     url=URL,
     keywords=["graphene", "blockchain", "health", "api", "rpc"],
     packages=["graphene_health"],
